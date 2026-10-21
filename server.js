@@ -289,7 +289,10 @@ function readRaw(req, limit = 10 * 1024 * 1024) {
 const STATIC = {
   '/': 'index.html',
   '/index.html': 'index.html',
-  '/catalog.json': 'catalog.json',
+  '/catalog.json': fs.existsSync(path.join(ROOT, 'data', 'catalog', 'catalog.json')) ? 'data/catalog/catalog.json' : 'catalog.json',
+  '/data/catalog/catalog.json': 'data/catalog/catalog.json',
+  '/data/catalog.json': 'data/catalog/catalog.json',
+  '/data/catalog/summary.json': 'data/catalog/summary.json',
   '/sample-import.csv': 'sample-import.csv'
 };
 
@@ -354,6 +357,14 @@ async function handle(req, res) {
       if (fs.existsSync(imgPath)) {
         const ext = path.extname(imgPath).slice(1).toLowerCase();
         return pipeStaticFile(res, imgPath, mime[ext] || 'image/webp');
+      }
+    }
+
+    // Individual card json files: /data/catalog/cards/...
+    if (req.method === 'GET' && u.pathname.startsWith('/data/catalog/cards/')) {
+      const cardPath = path.join(ROOT, u.pathname);
+      if (fs.existsSync(cardPath) && cardPath.endsWith('.json')) {
+        return pipeStaticFile(res, cardPath, 'application/json; charset=utf-8');
       }
     }
 
@@ -558,7 +569,7 @@ if (process.argv.includes('--self-test')) {
     }
   }
   try {
-    const z = fs.readFileSync(path.join(ROOT, 'catalog.json'));
+    const catalogFile = fs.existsSync(path.join(ROOT, 'data', 'catalog', 'catalog.json')) ? path.join(ROOT, 'data', 'catalog', 'catalog.json') : path.join(ROOT, 'catalog.json'); const z = fs.readFileSync(catalogFile);
     console.log('catalog items:', JSON.parse(z).length);
   } catch (e) {
     console.error(e.message);

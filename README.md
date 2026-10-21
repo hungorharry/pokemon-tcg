@@ -79,15 +79,15 @@ pokemon-tcg/
 │   ├── test_image_rules_v2.js
 │   └── test_pc.js
 │
-├── data/                   # Dữ liệu cào thô, OpenAPI spec và bản sao lưu
-│   ├── catalog_full_backup.json
-│   ├── PRICECHARTING_CANDIDATES.csv
-│   ├── pricecharting_crawled_images.json
-│   ├── psa-openapi.json
-│   ├── psa_store_scraped.json
-│   ├── remaining_16_scraped.json
-│   ├── slab_searched_8.json
-│   └── user_100_parsed.json
+├── data/                   # 💾 Toàn bộ dữ liệu JSON & tài nguyên dữ liệu
+│   ├── README.md           # Hướng dẫn chi tiết cấu trúc dữ liệu
+│   ├── catalog/            # Database danh mục thẻ chính thức (198 thẻ PSA)
+│   │   ├── catalog.json    # File catalog tổng hợp
+│   │   ├── summary.json    # Báo cáo thống kê tổng quan
+│   │   └── cards/          # Từng thẻ JSON riêng lẻ cực kỳ dễ đọc (snorlax/ & munchlax/)
+│   ├── scraped/            # Dữ liệu cào thị trường (eBay PSA Store, PriceCharting, v.v.)
+│   ├── specs/              # Đặc tả API (psa-openapi.json)
+│   └── backup/             # Bản lưu trữ lịch sử & dự phòng
 │
 ├── archive/                # Nguyên mẫu thử nghiệm cũ (snorlax-munchlax-investment-research)
 └── scratch/                # Thư mục nháp xử lý ảnh và script tạm thời

@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = __dirname;
-const CATALOG_PATH = path.join(ROOT_DIR, 'catalog.json');
+const candidateCatalogPaths = [path.join(ROOT_DIR, 'data', 'catalog', 'catalog.json'), path.join(ROOT_DIR, 'data', 'catalog.json'), path.join(ROOT_DIR, 'catalog.json')]; const CATALOG_PATH = candidateCatalogPaths.find(p => fs.existsSync(p)) || candidateCatalogPaths[0];
 const INDEX_PATH = path.join(ROOT_DIR, 'index.html');
 
 // Official Calibrated Knowledge Base for PSA 10 Snorlax & Munchlax Universe
@@ -144,7 +144,7 @@ function lookupCardPrice(cardId) {
   let url = card.ebayQuery ? `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(card.ebayQuery)}&LH_BIN=1&LH_Auction=0&rt=nc` : '';
 
   // 1. Try finding in psa_store_scraped.json
-  const candidateStorePaths = [path.join(__dirname, 'data', 'psa_store_scraped.json'), path.join(__dirname, 'psa_store_scraped.json'), path.join(path.dirname(CATALOG_PATH), 'data', 'psa_store_scraped.json')]; const storePath = candidateStorePaths.find(p => fs.existsSync(p));
+  const candidateStorePaths = [path.join(__dirname, 'data', 'scraped', 'ebay_psa_store.json'), path.join(__dirname, 'psa_store_scraped.json'), path.join(path.dirname(CATALOG_PATH), 'data', 'psa_store_scraped.json')]; const storePath = candidateStorePaths.find(p => fs.existsSync(p));
   if (fs.existsSync(storePath)) {
     try {
       const storeItems = JSON.parse(fs.readFileSync(storePath, 'utf8'));
@@ -217,4 +217,5 @@ if (require.main === module) {
 }
 
 module.exports = { auditAndCalibrate, PSA10_KNOWLEDGE_BASE, lookupCardPrice };
+
 

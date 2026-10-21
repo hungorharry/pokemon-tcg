@@ -15,7 +15,8 @@ const PARSED_ALL_PATH = path.join(__dirname, 'scratch', 'fanatics_parsed_all.jso
 let FANATICS_ITEMS = [];
 if (fs.existsSync(PARSED_ALL_PATH)) {
   try {
-    FANATICS_ITEMS = JSON.parse(fs.readFileSync(PARSED_ALL_PATH, 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(PARSED_ALL_PATH, 'utf8'));
+    FANATICS_ITEMS = raw.filter(c => (c.slabCompany || 'PSA').toUpperCase() === 'PSA');
   } catch (e) {
     console.error('Error loading fanatics_parsed_all.json:', e.message);
   }

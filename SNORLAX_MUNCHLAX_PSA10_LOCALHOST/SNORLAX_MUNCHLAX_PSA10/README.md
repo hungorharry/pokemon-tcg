@@ -1,90 +1,70 @@
-# 🐻 SNORLAX × MUNCHLAX MARKET ATLAS | POKÉMON PSA & MULTI-SLAB TERMINAL
+# 🐻 SNORLAX × MUNCHLAX MARKET ATLAS | POKÉMON PSA TERMINAL (PSA ONLY)
 
-> **Nền tảng phân tích đầu tư, săn deal thẻ bài Pokémon Snorlax & Munchlax (PSA · CGC · BGS 7–10) với dữ liệu thị trường trực tiếp từ 2 sàn đấu giá & giao dịch số 1 thế giới: Fanatics Collect (PWCC) và eBay.**
+> **Nền tảng phân tích đầu tư, săn deal thẻ bài Pokémon Snorlax & Munchlax quy chuẩn PSA (PSA 7–10) với dữ liệu thị trường trực tiếp từ 2 sàn giao dịch số 1 thế giới: Fanatics Collect (PWCC) và eBay.**
 
 ---
 
 ## 🌟 TÍNH NĂNG NỔI BẬT
 
+- **Quy chuẩn Duy nhất PSA (Strictly PSA Only)**:
+  - Chỉ tập trung vào chuẩn thanh khoản cao nhất thế giới từ **Professional Sports Authenticator (PSA)**:
+    - **PSA 10 Gem Mint**: Tiêu chuẩn thanh khoản và sưu tầm cao nhất.
+    - **PSA 9 Mint**: Cận hoàn hảo, cơ hội đầu tư giá trị hợp lý.
+    - **PSA 8 NM-MT & PSA 7 Near Mint**: Dành cho vintage cổ và các bộ thẻ hiếm.
+  - Toàn bộ danh mục 198 phiên bản thẻ Snorlax & Munchlax đều đạt chuẩn thẩm định PSA.
 - **Dual Marketplace Integration (Liên kết song song 2 sàn)**:
   - Mỗi thẻ bài đều được tích hợp đồng thời 2 nút truy cập nhanh: **`[⚡ Fanatics ↗]`** và **`[🛒 eBay ↗]`**.
   - Bảng chi tiết (Drawer) trang bị khối **So sánh đối chiếu trực tiếp 2 sàn** (giá niêm yết Mua Ngay của Fanatics Collect Vault và giá Buy It Now của eBay).
-  - Mọi phân hạng phẩm cấp (Grade 10 · 9.5 · 9 · 8 · 7) đều có sẵn liên kết mở trực tiếp từng grade trên cả 2 sàn.
-- **Quy chuẩn Đa công ty Thẩm định (Multi-Grading Slabs)**:
-  - **PSA (Professional Sports Authenticator)**: Chuẩn thanh khoản toàn cầu (PSA 10 Gem Mint, PSA 9, PSA 8, PSA 7).
-  - **CGC (Certified Guaranty Company)**: Đỉnh cao độ trong suốt phôi kính và phôi thẻ (CGC 10 Pristine Gold Label, CGC 10 Gem Mint, CGC 9.5 Mint+).
-  - **BGS (Beckett Grading Services)**: Thang điểm 4 chỉ số phụ khắt khe (BGS 10 Black Label, BGS 9.5).
-  - **SGC**: Thẩm định tem đen cổ điển.
-- **Chính sách Không Ảo giác Giá (Zero Hallucination Policy)**:
-  - 100% giá chào bán hiển thị trên ứng dụng là giá niêm yết bán ngay thực tế từ sàn (`type=FIXED` Buy Now), loại bỏ hoàn toàn các mức bid đấu giá tạm thời hay công thức toán suy diễn ảo.
-  - Tuyệt đối loại bỏ các đường dẫn ma (ghost links) — mọi liên kết tìm kiếm đều được chuẩn hóa và gắn cứng tham số `type=FIXED`.
-- **Hệ thống tiền tệ tối ưu cho Collector Việt Nam**:
-  - Hiển thị song song **Việt Nam Đồng (VNĐ / ₫)** theo tỷ giá chuẩn và **USD ($)**.
-  - Công tắc chuyển đổi tức thì `[₫ VNĐ]` / `[$ USD]` trên thanh công cụ.
-- **Mô hình định lượng chênh lệch (Grading Arbitrage Matrix)**:
-  - Phân tích chi phí mua thẻ Raw (chưa chấm điểm) + chi phí gửi lab thẩm định (PSA/CGC) để tính toán ROI và hệ số nhân vốn khi đạt Grade 10 hoặc Grade 9.
-- **Giao diện Terminal cao cấp (Supabase Light Theme & Dot Grid)**:
-  - Tối ưu trải nghiệm trực quan với nền lưới điểm (Dot Grid Background), hiệu ứng lật slab 3D kèm tia phản quang Holo Glare, bộ lọc tìm kiếm tức thì theo nhân vật, grade, công ty và tier đầu tư.
-- **Kiến trúc Thuần túy (Zero Dependency)**:
-  - Chạy trực tiếp trên Node.js thuần (Node 20+), không cần chạy `npm install`, không kéo theo thư mục `node_modules` nặng nề.
+  - Mọi phân hạng phẩm cấp (PSA 10 · PSA 9 · PSA 8 · PSA 7) đều có sẵn liên kết mở trực tiếp từng grade trên cả 2 sàn.
+- **Dữ liệu thật 100% - Không Hallucination (Zero Hallucination Guarantee)**:
+  - Mọi đường link Fanatics đều dẫn thẳng đến URL thẻ thật trên `fanaticscollect.com/buy-now/...`.
+  - Mọi link eBay dẫn đến URL item thật `ebay.com/itm/...` hoặc kết quả Buy It Now chính xác theo từ khóa + hãng + grade.
+  - Giá niêm yết là giá cố định (Fixed Price / Buy Now), không lấy giá Auction khởi điểm gây sai lệch nhận định thị trường.
+- **Mô hình Định lượng Chênh lệch & Arbitrage (PSA Arbitrage)**:
+  - Phân tích biên lợi nhuận giữa mua thẻ Raw Near Mint thị trường, trừ chi phí gửi lab thẩm định PSA + bảo hiểm, so sánh với lợi nhuận kỳ vọng khi đạt PSA 10 hoặc PSA 9.
 
 ---
 
-## 🚀 HƯỚNG DẪN KHỞI CHẠY (QUICK START)
+## 🚀 HƯỚNG DẪN KHỞI CHẠY NHANH
 
-### 1. Yêu cầu hệ thống
-- Máy tính đã cài đặt **[Node.js 20+](https://nodejs.org/)**.
+### Cách 1: Chạy trực tiếp trên Windows
+Nhấp đúp chuột vào file:
+```cmd
+CHAY_WINDOWS.bat
+```
+Trình duyệt sẽ tự động mở tại `http://localhost:4173`.
 
-### 2. Khởi chạy 1-Click trên Windows
-1. Nhấp đúp vào file **`CHAY_WINDOWS.bat`**.
-2. Trình duyệt sẽ tự động mở hoặc bạn truy cập: **`http://localhost:4173/`**.
-
-### 3. Khởi chạy trên macOS / Linux
-Mở Terminal tại thư mục dự án và chạy:
+### Cách 2: Dùng lệnh Node.js (Yêu cầu Node 18+)
 ```bash
-sh chay_mac_linux.sh
+# Đi vào thư mục chứa mã nguồn
+cd SNORLAX_MUNCHLAX_PSA10_LOCALHOST/SNORLAX_MUNCHLAX_PSA10
+
+# Khởi chạy server
+node server.js
 ```
-Sau đó truy cập trình duyệt tại: **`http://localhost:4173/`**.
+Mở trình duyệt: `http://localhost:4173` hoặc truy cập qua mạng nội bộ LAN: `http://<IP_LAN>:4173`.
 
 ---
 
-## ⚙️ CẤU HÌNH EBAY LIVE BROWSE API (TÙY CHỌN)
+## 🛠️ CẤU TRÚC DỰ ÁN
 
-Nếu bạn có tài khoản eBay Developer và muốn app tự động quét giá theo thời gian thực qua Browse API:
-1. Đăng ký tại [eBay Developer Portal](https://developer.ebay.com/my/keys) và lấy **Production Application Keys** (Client ID & Client Secret).
-2. Tạo file **`.env`** tại thư mục gốc (tham khảo `.env.example`):
-   ```env
-   EBAY_CLIENT_ID=your_ebay_client_id_here
-   EBAY_CLIENT_SECRET=your_ebay_client_secret_here
-   PORT=4173
-   HOST=0.0.0.0
-   ```
-3. Khởi động lại server. Hệ thống sẽ báo `🟢 AI Sentinel Engine online` và tự động cập nhật giá từ eBay Browse API.
-
----
-
-## 📁 CẤU TRÚC THƯ MỤC DỰ ÁN
-
-```text
-SNORLAX_MUNCHLAX_PSA10/
-├── index.html               # Ứng dụng Single Page Application (UI/UX, 3D Canvas, Logic)
-├── server.js                # Server Node.js thuần (API Proxy, Static Server, OAuth)
-├── catalog.json             # Cơ sở dữ liệu 548 thẻ Pokémon Snorlax & Munchlax
-├── ai-market-sentinel.js    # Engine kiểm toán và chuẩn hóa dữ liệu định kỳ
-├── fanatics-scraper.js      # Module cào và đồng bộ kho thẻ từ Fanatics Collect
-├── CHAY_WINDOWS.bat         # Script khởi chạy nhanh trên Windows
-├── chay_mac_linux.sh        # Script khởi chạy trên macOS/Linux
-├── sample-import.csv        # Mẫu file CSV để người dùng nhập thêm thẻ
-├── .env.example             # Mẫu khai báo biến môi trường eBay API
-├── README.md                # Tài liệu giới thiệu tổng quan dự án
-├── SUMMARY.md               # Báo cáo tóm tắt quá trình phát triển & nâng cấp
-├── HANDOFF.md               # Tài liệu bàn giao kỹ thuật & hướng dẫn bảo trì
-└── scratch/                 # Thư mục lưu trữ dữ liệu crawl, scripts hỗ trợ & hình ảnh
+```
+SNORLAX_MUNCHLAX_PSA10_LOCALHOST/SNORLAX_MUNCHLAX_PSA10/
+├── index.html               # Giao diện chính Single Page Application (Supabase White Modern Theme)
+├── server.js                # Local HTTP Server (Node.js thuần, không cần cài npm modules)
+├── catalog.json             # Danh mục 198 thẻ Snorlax & Munchlax chuẩn PSA có link thật
+├── ai-market-sentinel.js    # Bộ não AI kiểm định giá trị thị trường và link sàn
+├── fanatics-scraper.js      # Trình đồng bộ dữ liệu Buy Now từ sàn Fanatics Collect
+├── CHAY_WINDOWS.bat         # Script 1-click khởi chạy cho Windows
+├── chay_mac_linux.sh        # Script 1-click khởi chạy cho macOS/Linux
+├── README.md                # Tài liệu hướng dẫn tổng quan dự án
+├── SUMMARY.md               # Bản tóm tắt kiến trúc và tính năng
+└── HANDOFF.md               # Tài liệu bàn giao kỹ thuật & bảo trì
 ```
 
 ---
 
-## ⚖️ BẢN QUYỀN & TUYÊN BỐ MIỄN TRỪ
-- Dự án được phát triển phục vụ mục đích nghiên cứu dữ liệu và sưu tầm cá nhân.
-- Pokémon, tên các nhân vật và hình ảnh thuộc bản quyền của **Nintendo / Creatures Inc. / GAME FREAK inc.**
-- Dữ liệu định giá và danh mục listing thuộc bản quyền của **Fanatics Collect** và **eBay Inc.**
+## 🛡️ MINH BẠCH DỮ LIỆU
+
+- **Phân hạng S/A/B/C/D/F**: Là phân hạng tiềm năng đầu tư và độ khan hiếm theo tiêu chuẩn riêng của người sưu tầm, độc lập với điểm số grade của slab.
+- **Giá thị trường**: Là giá chào bán cố định (Buy Now) tại thời điểm thu thập dữ liệu; người mua cần kiểm tra tình trạng thẻ và chứng chỉ thực tế trước khi thanh toán.

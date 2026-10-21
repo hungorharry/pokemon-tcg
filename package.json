@@ -1,0 +1,22 @@
+{
+  "name": "snorlax-munchlax-investment-research",
+  "version": "1.0.0",
+  "description": "Snorlax and Munchlax Graded Card Investment Research Dashboard & Agent",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --env-file-if-exists=.env server.js",
+    "test": "node --test ebay-market.test.js graded-research.test.js",
+    "research:update": "node update-free-research.js"
+  },
+  "keywords": [
+    "pokemon",
+    "snorlax",
+    "munchlax",
+    "psa10",
+    "cgc10",
+    "investment-research"
+  ],
+  "author": "Antigravity Research Agent",
+  "license": "MIT"
+}

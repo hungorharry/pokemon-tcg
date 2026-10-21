@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
     "dev": "node --env-file-if-exists=.env server.js",
-    "test": "node --test ebay-market.test.js graded-research.test.js",
-    "research:update": "node update-free-research.js"
+    "test": "node --test tests/ebay-market.test.js tests/graded-research.test.js",
+    "test:rules": "node tests/test_image_rules_v2.js",
+    "research:update": "node scripts/update-free-research.js"
   },
   "keywords": [
     "pokemon",

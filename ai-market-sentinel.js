@@ -1,10 +1,10 @@
-/**
+﻿/**
  * AI Market Sentinel - Autonomous Background Auditor & Calibrator
  * Runs continuously in background:
  * 1. Audits every card in the catalog against real PSA 10 market facts.
  * 2. Neutralizes fake outlier spikes (e.g., $20,000 DP Reverse or $81,000 Rising Rivals).
  * 3. Eliminates grade confusion (prevents PSA 8/9/raw prices from contaminating PSA 10 Buy It Now).
- * 4. Ensures 100% of cards have authenticated PSA 10 Population numbers (no more "Không có" or "0").
+ * 4. Ensures 100% of cards have authenticated PSA 10 Population numbers (no more "KhÃ´ng cÃ³" or "0").
  * 5. Auto-synchronizes catalog.json and index.html in real time.
  */
 
@@ -33,7 +33,7 @@ const PSA10_KNOWLEDGE_BASE = {
   'snor-013': { name: 'Skyridge Regular #100', realPC: 1900, realBIN: 1800, pop10: 170, popTotal: 656 },
   'snor-014': { name: 'Eevee & Snorlax GX Rainbow #191', realPC: 1400, realBIN: 1390, pop10: 565, popTotal: 1311 },
   'snor-015': { name: 'Legendary Collection Regular #64', realPC: 480, realBIN: 450, pop10: 56, popTotal: 236 },
-  'snor-016': { name: 'Pokémon Center Stamp Promo #51', realPC: 450, realBIN: 420, pop10: 1607, popTotal: 5979 },
+  'snor-016': { name: 'PokÃ©mon Center Stamp Promo #51', realPC: 450, realBIN: 420, pop10: 1607, popTotal: 5979 },
   'snor-017': { name: 'Snorlax VMAX Rainbow #206', realPC: 65, realBIN: 61, pop10: 4065, popTotal: 5173 },
   'snor-018': { name: 'Snorlax GX Promo SM05', realPC: 130, realBIN: 120, pop10: 216, popTotal: 1254 },
   'snor-019': { name: 'Snorlax Trainer Gallery TG10', realPC: 530, realBIN: 520, pop10: 1821, popTotal: 7290 },
@@ -47,25 +47,25 @@ const PSA10_KNOWLEDGE_BASE = {
   'bonus-005': { name: 'Snorlax Dark Phantasma #077 Japanese', realPC: 160, realBIN: 150, pop10: 340, popTotal: 1250 },
   'bonus-006': { name: 'Snorlax Taruka Promo', realPC: 75, realBIN: 70, pop10: 180, popTotal: 320 },
   'bonus-007': { name: 'Snorlax Old Maid Super High Tension', realPC: 85, realBIN: 80, pop10: 95, popTotal: 210 },
-  'bonus-008': { name: 'Munchlax PokéPark Forest #008', realPC: 1050, realBIN: 1000, pop10: 38, popTotal: 412 },
-  'bonus-009': { name: 'Munchlax Domino’s Pizza Promo #125', realPC: 900, realBIN: 850, pop10: 45, popTotal: 390 },
+  'bonus-008': { name: 'Munchlax PokÃ©Park Forest #008', realPC: 1050, realBIN: 1000, pop10: 38, popTotal: 412 },
+  'bonus-009': { name: 'Munchlax Dominoâ€™s Pizza Promo #125', realPC: 900, realBIN: 850, pop10: 45, popTotal: 390 },
   'bonus-010': { name: "May's Munchlax #008", realPC: 850, realBIN: 839, pop10: 52, popTotal: 310 },
   'bonus-011': { name: 'Munchlax Bonds to the End of Time 1st #069', realPC: 920, realBIN: 890, pop10: 68, popTotal: 340 },
   'bonus-012': { name: 'Munchlax GG End #040', realPC: 130, realBIN: 122, pop10: 340, popTotal: 1250 },
-  'bonus-013': { name: 'Munchlax PokéPark Grand Opening #040', realPC: 2100, realBIN: 2024, pop10: 76, popTotal: 380 },
-  'bonus-014': { name: 'Munchlax Pokémon Center Tokyo #025', realPC: 820, realBIN: 799, pop10: 42, popTotal: 360 },
+  'bonus-013': { name: 'Munchlax PokÃ©Park Grand Opening #040', realPC: 2100, realBIN: 2024, pop10: 76, popTotal: 380 },
+  'bonus-014': { name: 'Munchlax PokÃ©mon Center Tokyo #025', realPC: 820, realBIN: 799, pop10: 42, popTotal: 360 },
   'bonus-015': { name: 'Munchlax Meiji Chocolate Promo', realPC: 1850, realBIN: 1800, pop10: 18, popTotal: 210 },
-  'bonus-016': { name: 'Rota’s Munchlax', realPC: 75, realBIN: 70, pop10: 125, popTotal: 450 },
+  'bonus-016': { name: 'Rotaâ€™s Munchlax', realPC: 75, realBIN: 70, pop10: 125, popTotal: 450 },
   'bonus-017': { name: 'Munchlax Reverse Holo #114', realPC: 850, realBIN: 826, pop10: 35, popTotal: 290 },
   'bonus-018': { name: 'Munchlax D&P Promo 070', realPC: 720, realBIN: 695, pop10: 48, popTotal: 320 },
   'bonus-019': { name: 'Munchlax Japanese Promo 040', realPC: 230, realBIN: 222, pop10: 62, popTotal: 310 }
 };
 
 function auditAndCalibrate() {
-  console.log(`[${new Date().toISOString()}] [AI Sentinel] Bắt đầu chu trình quét và hiệu chuẩn dữ liệu toàn bộ danh mục...`);
+  console.log(`[${new Date().toISOString()}] [AI Sentinel] Báº¯t Ä‘áº§u chu trÃ¬nh quÃ©t vÃ  hiá»‡u chuáº©n dá»¯ liá»‡u toÃ n bá»™ danh má»¥c...`);
 
   if (!fs.existsSync(CATALOG_PATH) || !fs.existsSync(INDEX_PATH)) {
-    console.error('[AI Sentinel] Không tìm thấy file catalog.json hoặc index.html');
+    console.error('[AI Sentinel] KhÃ´ng tÃ¬m tháº¥y file catalog.json hoáº·c index.html');
     return;
   }
 
@@ -80,28 +80,28 @@ function auditAndCalibrate() {
 
     // 1. Audit PriceCharting outliers
     if (kb.realPC && (c.pricecharting !== kb.realPC)) {
-      console.log(`  -> Hiệu chuẩn PriceCharting cho [${c.id}] ${c.name}: $${c.pricecharting} -> $${kb.realPC}`);
+      console.log(`  -> Hiá»‡u chuáº©n PriceCharting cho [${c.id}] ${c.name}: $${c.pricecharting} -> $${kb.realPC}`);
       c.pricecharting = kb.realPC;
       modified = true;
     }
 
     // 2. Audit eBay Buy It Now (eliminate PSA 8/9 confusion or extreme asks)
     if (kb.realBIN && (c.manualPrice !== kb.realBIN)) {
-      console.log(`  -> Hiệu chuẩn eBay BIN cho [${c.id}] ${c.name}: $${c.manualPrice} -> $${kb.realBIN}`);
+      console.log(`  -> Hiá»‡u chuáº©n eBay BIN cho [${c.id}] ${c.name}: $${c.manualPrice} -> $${kb.realBIN}`);
       c.manualPrice = kb.realBIN;
       modified = true;
     }
 
     // 3. Audit PSA 10 Population (no more null or 0)
     if (kb.pop10 !== undefined && (c.psa10pop !== kb.pop10)) {
-      console.log(`  -> Hiệu chuẩn PSA 10 Pop cho [${c.id}] ${c.name}: ${c.psa10pop} -> ${kb.pop10}`);
+      console.log(`  -> Hiá»‡u chuáº©n PSA 10 Pop cho [${c.id}] ${c.name}: ${c.psa10pop} -> ${kb.pop10}`);
       c.psa10pop = kb.pop10;
       modified = true;
     }
 
     // 4. Audit PSA Total Submissions
     if (kb.popTotal !== undefined && (c.psaTotal !== kb.popTotal)) {
-      console.log(`  -> Hiệu chuẩn PSA Total Pop cho [${c.id}] ${c.name}: ${c.psaTotal} -> ${kb.popTotal}`);
+      console.log(`  -> Hiá»‡u chuáº©n PSA Total Pop cho [${c.id}] ${c.name}: ${c.psaTotal} -> ${kb.popTotal}`);
       c.psaTotal = kb.popTotal;
       modified = true;
     }
@@ -125,26 +125,26 @@ function auditAndCalibrate() {
       fs.writeFileSync(INDEX_PATH, html);
     }
 
-    console.log(`[AI Sentinel] Đã tự động hiệu chuẩn ${correctionsMade} thẻ bài và đồng bộ sang index.html thành công!`);
+    console.log(`[AI Sentinel] ÄÃ£ tá»± Ä‘á»™ng hiá»‡u chuáº©n ${correctionsMade} tháº» bÃ i vÃ  Ä‘á»“ng bá»™ sang index.html thÃ nh cÃ´ng!`);
   } else {
-    console.log('[AI Sentinel] Toàn bộ 39 thẻ đã đạt chuẩn 100% (Giá chuẩn eBay PSA 10, Pop chuẩn, không có lỗi).');
+    console.log('[AI Sentinel] ToÃ n bá»™ 39 tháº» Ä‘Ã£ Ä‘áº¡t chuáº©n 100% (GiÃ¡ chuáº©n eBay PSA 10, Pop chuáº©n, khÃ´ng cÃ³ lá»—i).');
   }
 }
 
 function lookupCardPrice(cardId) {
-  if (!fs.existsSync(CATALOG_PATH)) return { success: false, error: 'catalog.json không tồn tại' };
+  if (!fs.existsSync(CATALOG_PATH)) return { success: false, error: 'catalog.json khÃ´ng tá»“n táº¡i' };
   const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
   const card = catalog.find(c => c.id === cardId);
-  if (!card) return { success: false, error: 'Không tìm thấy thẻ ' + cardId };
+  if (!card) return { success: false, error: 'KhÃ´ng tÃ¬m tháº¥y tháº» ' + cardId };
 
   const kb = PSA10_KNOWLEDGE_BASE[cardId];
   let price = card.manualPrice;
-  let source = 'Giá thẩm định thị trường PSA 10';
+  let source = 'GiÃ¡ tháº©m Ä‘á»‹nh thá»‹ trÆ°á»ng PSA 10';
   let title = card.name;
   let url = card.ebayQuery ? `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(card.ebayQuery)}&LH_BIN=1&LH_Auction=0&rt=nc` : '';
 
   // 1. Try finding in psa_store_scraped.json
-  const storePath = path.join(path.dirname(CATALOG_PATH), '..', '..', 'psa_store_scraped.json');
+  const candidateStorePaths = [path.join(__dirname, 'data', 'psa_store_scraped.json'), path.join(__dirname, 'psa_store_scraped.json'), path.join(path.dirname(CATALOG_PATH), 'data', 'psa_store_scraped.json')]; const storePath = candidateStorePaths.find(p => fs.existsSync(p));
   if (fs.existsSync(storePath)) {
     try {
       const storeItems = JSON.parse(fs.readFileSync(storePath, 'utf8'));
@@ -162,7 +162,7 @@ function lookupCardPrice(cardId) {
         if (vnd > 0) {
           const usd = Math.round(vnd / 25400);
           price = usd;
-          source = 'PSA Official Store trên eBay (chuyển đổi từ ' + match.priceRaw + ')';
+          source = 'PSA Official Store trÃªn eBay (chuyá»ƒn Ä‘á»•i tá»« ' + match.priceRaw + ')';
           title = match.title;
           if (match.link) url = match.link;
         }
@@ -176,7 +176,7 @@ function lookupCardPrice(cardId) {
     if (kb.realPC) card.pricecharting = kb.realPC;
     if (kb.pop10 !== undefined) card.psa10pop = kb.pop10;
     if (kb.popTotal !== undefined) card.psaTotal = kb.popTotal;
-    source = 'PSA Official Store / Chỉ số đấu giá quốc tế';
+    source = 'PSA Official Store / Chá»‰ sá»‘ Ä‘áº¥u giÃ¡ quá»‘c táº¿';
   }
 
   card.manualPrice = price;
@@ -212,8 +212,9 @@ auditAndCalibrate();
 // If invoked as daemon/standalone, run periodic loop every 60 seconds
 if (require.main === module) {
   const INTERVAL_MS = 60 * 1000;
-  console.log(`[AI Sentinel] Khởi động chế độ chạy ngầm tự động (chu kỳ ${INTERVAL_MS / 1000}s/lần)...`);
+  console.log(`[AI Sentinel] Khá»Ÿi Ä‘á»™ng cháº¿ Ä‘á»™ cháº¡y ngáº§m tá»± Ä‘á»™ng (chu ká»³ ${INTERVAL_MS / 1000}s/láº§n)...`);
   setInterval(auditAndCalibrate, INTERVAL_MS);
 }
 
 module.exports = { auditAndCalibrate, PSA10_KNOWLEDGE_BASE, lookupCardPrice };
+

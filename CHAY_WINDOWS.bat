@@ -2,20 +2,24 @@
 chcp 65001 > nul
 cd /d "%~dp0"
 echo.
-echo =======================================
-echo SNORLAX x MUNCHLAX - PSA 10 MARKET ATLAS
-echo =======================================
+echo ====================================================
+echo  SNORLAX x MUNCHLAX - PSA MARKET ATLAS (NEXT.JS APP)
+echo ====================================================
 where node >nul 2>nul
 if errorlevel 1 (
-  echo CHUA CO NODE.JS. Cai Node.js 20+ tu https://nodejs.org/
+  echo CHUA CO NODE.JS. Cai Node.js 18+ tu https://nodejs.org/
   pause
   exit /b 1
 )
 if not exist .env (
   copy /Y .env.example .env >nul
-  echo Da tao .env. Neu muon gia eBay LIVE, mo .env dien App ID va Cert ID cua eBay Developer.
+  echo Da tao .env.
 )
-echo Dang mo http://127.0.0.1:4173
-start "" "http://127.0.0.1:4173"
-node server.js
+if not exist node_modules (
+  echo Dang cai dat thu vien Next.js...
+  call npm install
+)
+echo Dang mo ung dung Next.js tai http://localhost:4173 ...
+start "" "http://localhost:4173"
+call npm run dev
 pause

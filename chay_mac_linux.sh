@@ -1,10 +1,7 @@
-#!/usr/bin/env sh
-set -e
+#!/usr/bin/env bash
 cd "$(dirname "$0")"
-if ! command -v node >/dev/null 2>&1; then
- echo 'Cần cài Node.js 20+ từ https://nodejs.org/'
- exit 1
-fi
-if [ ! -f .env ]; then cp .env.example .env; fi
-printf '\nMở trình duyệt tại http://127.0.0.1:4173\n'
-node server.js
+command -v node >/dev/null 2>&1 || { echo "Chưa có Node.js. Cài Node 18+ từ https://nodejs.org/"; exit 1; }
+[ -f .env ] || cp .env.example .env
+[ -d node_modules ] || npm install
+if command -v open >/dev/null 2>&1; then open "http://localhost:4173"; elif command -v xdg-open >/dev/null 2>&1; then xdg-open "http://localhost:4173"; fi
+npm run dev

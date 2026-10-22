@@ -1,4 +1,4 @@
-﻿/**
+/**
  * AI Market Sentinel - Autonomous Background Auditor & Calibrator
  * Runs continuously in background:
  * 1. Audits every card in the catalog against real PSA 10 market facts.
@@ -62,7 +62,7 @@ const PSA10_KNOWLEDGE_BASE = {
 };
 
 function auditAndCalibrate() {
-  console.log(`[${new Date().toISOString()}] [AI Sentinel] Báº¯t Ä‘áº§u chu trÃ¬nh quÃ©t vÃ  hiá»‡u chuáº©n dá»¯ liá»‡u toÃ n bá»™ danh má»¥c...`);
+  console.log(`[${new Date().toISOString()}] [AI Sentinel] Bắt đầu chu trình quét và hiệu chuẩn dữ liệu toàn bộ danh mục...`);
 
   if (!fs.existsSync(CATALOG_PATH) || !fs.existsSync(INDEX_PATH)) {
     console.error('[AI Sentinel] KhÃ´ng tÃ¬m tháº¥y file catalog.json hoáº·c index.html');
@@ -127,7 +127,7 @@ function auditAndCalibrate() {
 
     console.log(`[AI Sentinel] ÄÃ£ tá»± Ä‘á»™ng hiá»‡u chuáº©n ${correctionsMade} tháº» bÃ i vÃ  Ä‘á»“ng bá»™ sang index.html thÃ nh cÃ´ng!`);
   } else {
-    console.log('[AI Sentinel] ToÃ n bá»™ 39 tháº» Ä‘Ã£ Ä‘áº¡t chuáº©n 100% (GiÃ¡ chuáº©n eBay PSA 10, Pop chuáº©n, khÃ´ng cÃ³ lá»—i).');
+    console.log('[AI Sentinel] Toàn bộ 39 thẻ đã đạt chuẩn 100% (Giá chuẩn eBay PSA 10, Pop chuẩn, không có lỗi).');
   }
 }
 
@@ -135,7 +135,7 @@ function lookupCardPrice(cardId) {
   if (!fs.existsSync(CATALOG_PATH)) return { success: false, error: 'catalog.json khÃ´ng tá»“n táº¡i' };
   const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
   const card = catalog.find(c => c.id === cardId);
-  if (!card) return { success: false, error: 'KhÃ´ng tÃ¬m tháº¥y tháº» ' + cardId };
+  if (!card) return { success: false, error: 'Không tìm thấy thẻ ' + cardId };
 
   const kb = PSA10_KNOWLEDGE_BASE[cardId];
   let price = card.manualPrice;

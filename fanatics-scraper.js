@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Fanatics Collect - Direct Marketplace Ingestion & Synchronizer
  * Ingests live Snorlax and Munchlax listings directly from Fanatics Collect Vault
  * Supports Multi-Grading Slabs: CGC (Pristine 10, Gem Mint 10, Mint 9.5), BGS, PSA

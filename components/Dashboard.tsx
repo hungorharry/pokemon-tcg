@@ -78,7 +78,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
         const tg = Number(grade);
         if (tg === 10 ? gr < 10 : Math.floor(gr) !== tg) return false;
       }
-      if (currentTier !== 'ALL' && gradeToTier(getScore(c)) !== currentTier) return false;
+      if (currentTier !== 'ALL' && (c.tier || gradeToTier(getScore(c))) !== currentTier) return false;
       if (character !== 'all' && c.character !== character) return false;
       if (showFavoritesOnly && !favorites[c.id]) return false;
 

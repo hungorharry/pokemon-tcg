@@ -60,6 +60,9 @@ export const getBest = (c: PokemonCard): LiveItem | null => {
 };
 
 export const getDiff = (c: PokemonCard): number | null => {
+  if (c.diffPercent != null && Number.isFinite(+c.diffPercent)) {
+    return +c.diffPercent;
+  }
   const b = getBest(c);
   if (!b || !c.pricecharting || b.currency !== 'USD') return null;
   return ((b.price / c.pricecharting) - 1) * 100;

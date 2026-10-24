@@ -33,6 +33,10 @@ export interface PokemonCard {
   ebayItemPrice?: number | null;
   manualUrl?: string;
   favorite?: boolean;
+  tier?: TierLevel;
+  diffPercent?: number | null;
+  priceDiffUSD?: number | null;
+  dealRating?: string;
 }
 
 export type TierLevel = 'ALL' | 'S' | 'A' | 'B' | 'C' | 'D' | 'F';

@@ -60,7 +60,7 @@ export const CardTable: React.FC<CardTableProps> = ({
         <tbody>
           {cards.map((c) => {
             const score = getScore(c);
-            const tier = gradeToTier(score);
+            const tier = c.tier || gradeToTier(score);
             const diff = getDiff(c);
             const bestPrice = c.listingPriceUSD || c.manualPrice;
 

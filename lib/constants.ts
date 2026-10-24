@@ -47,4 +47,13 @@ export const GRADE_META = {
     border: 'rgba(220, 38, 38, 0.25)',
     bg: 'rgba(220, 38, 38, 0.1)',
   },
+  6: {
+    title: 'PHÂN HẠNG EX-MT VÀ CỔ ĐIỂN (GRADE ≤ 6)',
+    cond: 'EXCELLENT-MINT / VINTAGE',
+    badge: '📜',
+    desc: 'Thẻ vintage hiếm có - Phân khúc giá mềm cho nhà sưu tầm',
+    color: '#7C3AED',
+    border: 'rgba(124, 58, 237, 0.25)',
+    bg: 'rgba(124, 58, 237, 0.1)',
+  },
 };

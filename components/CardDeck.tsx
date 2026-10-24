@@ -59,14 +59,16 @@ export const CardDeck: React.FC<CardDeckProps> = ({
   }
 
   // Default: Group into grade sections
-  const gradesOrder = [10, 9, 8, 7] as const;
+  const gradesOrder = [10, 9, 8, 7, 6] as const;
 
   return (
     <div>
       {gradesOrder.map((g) => {
         const sub = cards.filter((c) => {
           const gr = Number(c.grade || 10);
-          return g === 10 ? gr >= 10 : Math.floor(gr) === g;
+          if (g === 10) return gr >= 10;
+          if (g === 6) return gr <= 6;
+          return Math.floor(gr) === g;
         });
 
         if (!sub.length) return null;

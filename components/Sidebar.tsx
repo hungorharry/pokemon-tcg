@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <p className="sideLabel tier-nav-title">Xếp hạng đầu tư</p>
         {keys.map((k) => {
           const count = catalog.filter(
-            (c) => k === 'ALL' || gradeToTier(getScore(c)) === k
+            (c) => k === 'ALL' || (c.tier || gradeToTier(getScore(c))) === k
           ).length;
           const meta = TIER_META[k];
           return (

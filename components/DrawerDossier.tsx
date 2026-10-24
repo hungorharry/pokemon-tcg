@@ -133,7 +133,9 @@ export const DrawerDossier: React.FC<DrawerDossierProps> = ({
                   <span style={{ fontSize: '12px', fontWeight: 800, color: '#059669' }}>🛒 EBAY BUY IT NOW</span>
                 </div>
                 <div style={{ fontSize: '16px', fontWeight: 800, color: '#059669', fontFamily: 'var(--font-mono)' }}>
-                  {card.ebayItemPrice
+                  {(!isFanatics && card.listingPriceUSD)
+                    ? money(card.listingPriceUSD, false, currency)
+                    : card.ebayItemPrice
                     ? money(card.ebayItemPrice, false, currency)
                     : card.manualPrice
                     ? money(card.manualPrice, false, currency)

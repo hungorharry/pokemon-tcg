@@ -41,12 +41,7 @@ export const CardItem: React.FC<CardItemProps> = ({
 
   const gradeLabel = card.gradeLabel || `PSA ${card.grade || 10}`;
   const isFanatics = card.listingUrl && card.listingUrl.includes('fanaticscollect.com');
-  const isAuction = card.listingType === 'AUCTION' || (card.sellerBadge && card.sellerBadge.includes('Auction'));
-  const platformLabel = isFanatics
-    ? isAuction
-      ? `🔨 Fanatics (${card.bids || 0} bids)`
-      : '⚡ Fanatics Buy Now'
-    : '🛒 eBay Buy Now';
+  const platformLabel = isFanatics ? '⚡ Fanatics Buy Now' : '🛒 eBay Buy Now';
 
   const badgeDiff = (d: number | null) => {
     if (d == null) return <span className="delta mid">Chưa có %</span>;
@@ -210,7 +205,7 @@ export const CardItem: React.FC<CardItemProps> = ({
         <div className="pricebox">
           <div>
             <div className="lbl">
-              {isFanatics ? (isAuction ? 'Fanatics Bid' : 'Fanatics BIN') : 'eBay BIN'}
+              {isFanatics ? 'Fanatics BIN' : 'eBay BIN'}
             </div>
             <div className="val">
               {best ? money(best.price, false, currency) : 'Chưa có giá'}

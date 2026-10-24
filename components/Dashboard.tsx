@@ -73,6 +73,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
     const q = searchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     const list = catalog.filter((c) => {
+      // BẮT BUỘC: Loại bỏ hoàn toàn thẻ có Bids / Đấu giá (Chỉ giữ Buy It Now / Fixed Price)
+      if (c.listingType === 'AUCTION' || (c.bids != null && c.bids > 0)) return false;
+      if (c.sellerBadge && c.sellerBadge.toLowerCase().includes('auction')) return false;
+
       if (grade !== 'all') {
         const gr = Number(c.grade || 10);
         const tg = Number(grade);

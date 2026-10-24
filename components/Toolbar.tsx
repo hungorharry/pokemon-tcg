@@ -95,6 +95,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           style={{ fontWeight: 700 }}
         >
           <option value="score">🏆 Điểm tiềm năng: Cao → Thấp</option>
+          <option value="seller_rep">🛡️ Uy tín Seller: Giao dịch nhiều nhất (&gt;8.000 GD)</option>
           <option value="pc_desc">📈 Giá PriceCharting: Cao → Thấp</option>
           <option value="pc_asc">📉 Giá PriceCharting: Thấp → Cao</option>
           <option value="price_desc">💎 Giá sàn Buy Now: Cao → Thấp</option>

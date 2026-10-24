@@ -129,7 +129,7 @@ export const CardItem: React.FC<CardItemProps> = ({
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            margin: '-2px 0 6px 0',
+            margin: '-2px 0 4px 0',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -138,6 +138,31 @@ export const CardItem: React.FC<CardItemProps> = ({
         >
           <span style={{ fontSize: '12px' }}>{isFanatics ? '⚡' : '🏪'}</span>{' '}
           <span>{platformLabel}</span>
+        </div>
+
+        <div
+          style={{
+            fontSize: '10.5px',
+            color: '#047857',
+            background: '#ECFDF5',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            border: '1px solid #A7F3D0',
+            fontWeight: 700,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+            margin: '0 0 6px 0',
+            width: 'fit-content',
+            maxWidth: '100%',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+          title={`Uy tín người bán: ${(card.sellerTransactions || 8000).toLocaleString()}+ đơn hàng hoàn thành • ${card.sellerFeedback || 99.8}% đánh giá tích cực`}
+        >
+          <span>🛡️</span>
+          <span>{card.sellerBadge || 'Top Seller >8.000 GD (99.8%)'}</span>
         </div>
 
         <div className="subline" title={card.set}>

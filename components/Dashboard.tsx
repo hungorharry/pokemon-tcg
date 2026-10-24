@@ -90,6 +90,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
     });
 
     list.sort((a, b) => {
+      if (sort === 'seller_rep') {
+        const txB = b.sellerTransactions ?? 0;
+        const txA = a.sellerTransactions ?? 0;
+        if (txB !== txA) return txB - txA;
+        return (b.sellerFeedback ?? 0) - (a.sellerFeedback ?? 0);
+      }
       if (sort === 'pc_desc') return (b.pricecharting ?? 0) - (a.pricecharting ?? 0);
       if (sort === 'pc_asc') return (a.pricecharting ?? Infinity) - (b.pricecharting ?? Infinity);
       if (sort === 'price_desc') return (getBest(b)?.price ?? 0) - (getBest(a)?.price ?? 0);

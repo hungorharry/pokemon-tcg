@@ -24,6 +24,9 @@ export interface PokemonCard {
   seller?: string;
   sellerHref?: string;
   sellerBadge?: string;
+  sellerTransactions?: number;
+  sellerFeedback?: number;
+  isPowerSeller8k?: boolean;
   listingUrl?: string;
   listingTitle?: string;
   listingType?: string;
@@ -51,6 +54,7 @@ export type SortOption =
   | 'price_asc'
   | 'deal'
   | 'scarcity'
+  | 'seller_rep'
   | 'year_old'
   | 'year_new';
 

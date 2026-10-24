@@ -105,9 +105,22 @@ export const fanaticsLink = (c: PokemonCard): string => {
 };
 
 export const ebayLink = (c: PokemonCard): string => {
-  if (c.ebayItemUrl && c.ebayItemUrl.includes('ebay.com/itm/')) return c.ebayItemUrl;
+  // 1. Nếu bản thân listingUrl là một eBay item cụ thể
+  if (c.listingUrl && c.listingUrl.includes('ebay.com/itm/')) return c.listingUrl;
   if (c.manualUrl && c.manualUrl.includes('ebay.com/itm/')) return c.manualUrl;
+
+  // 2. Nếu là thẻ Fanatics Collect, không dùng ebayItemUrl ngẫu nhiên
+  if (c.listingUrl && c.listingUrl.includes('fanaticscollect.com')) {
+    const co = c.slabCompany || 'PSA';
+    const gr = c.grade || 10;
+    const q = encodeURIComponent(c.character + ' ' + cleanCardKeyword(c) + ' ' + co + ' ' + gr);
+    return 'https://www.ebay.com/sch/i.html?_nkw=' + q + '&LH_BIN=1&LH_Auction=0&rt=nc';
+  }
+
+  // 3. Nếu có ebayItemUrl hợp lệ
+  if (c.ebayItemUrl && c.ebayItemUrl.includes('ebay.com/itm/')) return c.ebayItemUrl;
   if (c.listingUrl && c.listingUrl.includes('ebay.com')) return c.listingUrl;
+
   const co = c.slabCompany || 'PSA';
   const gr = c.grade || 10;
   const q = encodeURIComponent(c.character + ' ' + cleanCardKeyword(c) + ' ' + co + ' ' + gr);

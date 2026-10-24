@@ -144,6 +144,7 @@ export const CardItem: React.FC<CardItemProps> = ({
           <span style={{ fontWeight: 600, color: 'var(--sb-text-primary)' }}>
             {card.set || 'Không rõ bộ'}
           </span>
+          <span style={{ margin: '0 4px', color: 'var(--sb-text-muted)' }}>•</span>
           <span className="subline-pop">
             {card.psa10pop != null ? dec(card.psa10pop) + ' PSA 10' : 'Slab: PSA'}
           </span>

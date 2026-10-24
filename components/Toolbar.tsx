@@ -17,6 +17,8 @@ interface ToolbarProps {
   onGradeChange: (g: string) => void;
   showFavoritesOnly: boolean;
   onToggleFavorites: () => void;
+  maxBudget400M?: boolean;
+  onToggleMaxBudget400M?: () => void;
   viewMode: 'grid' | 'table';
   onViewModeChange: (v: 'grid' | 'table') => void;
   resultCount: number;
@@ -42,6 +44,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onGradeChange,
   showFavoritesOnly,
   onToggleFavorites,
+  maxBudget400M = true,
+  onToggleMaxBudget400M,
   viewMode,
   onViewModeChange,
   resultCount,
@@ -144,6 +148,17 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         >
           {showFavoritesOnly ? '♥ Đã lọc yêu thích' : '♡ Đã lưu'}
         </button>
+
+        {onToggleMaxBudget400M && (
+          <button
+            className={`toggle ${maxBudget400M ? 'active' : ''}`}
+            onClick={onToggleMaxBudget400M}
+            style={maxBudget400M ? { background: '#059669', color: '#FFF', borderColor: '#059669', fontWeight: 700 } : { fontWeight: 600 }}
+            title="Bật/Tắt chế độ Danh mục P/P: Tự động loại bỏ thẻ trên 400 triệu"
+          >
+            {maxBudget400M ? '💎 P/P (< 400 củ)' : '🌐 Tất cả giá'}
+          </button>
+        )}
       </section>
 
       <section className="toolbar2">

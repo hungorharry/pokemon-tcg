@@ -27,6 +27,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
   const [currency, setCurrency] = useState<Currency>('VND');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState<boolean>(false);
+  const [maxBudget400M, setMaxBudget400M] = useState<boolean>(true);
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [serverOnline, setServerOnline] = useState<boolean>(true);
@@ -77,6 +78,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
       if (c.listingType === 'AUCTION' || (c.bids != null && c.bids > 0)) return false;
       if (c.sellerBadge && c.sellerBadge.toLowerCase().includes('auction')) return false;
 
+      // Danh mục P/P: Bỏ các thẻ trên 400 triệu VNĐ (~$15,710 USD)
+      if (maxBudget400M) {
+        const p = Number(c.listingPriceUSD || c.manualPrice || 0);
+        if (p > 400000000 / 25460) return false;
+      }
+
       if (grade !== 'all') {
         const gr = Number(c.grade || 10);
         const tg = Number(grade);
@@ -119,7 +126,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
     });
 
     return list;
-  }, [catalog, currentTier, character, grade, sort, searchQuery, showFavoritesOnly, favorites]);
+  }, [catalog, currentTier, character, grade, sort, searchQuery, showFavoritesOnly, maxBudget400M, favorites]);
 
   // Counts for pills
   const snorlaxCount = catalog.filter((c) => c.character === 'Snorlax').length;
@@ -212,6 +219,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
           onGradeChange={setGrade}
           showFavoritesOnly={showFavoritesOnly}
           onToggleFavorites={() => setShowFavoritesOnly(!showFavoritesOnly)}
+          maxBudget400M={maxBudget400M}
+          onToggleMaxBudget400M={() => setMaxBudget400M(!maxBudget400M)}
           viewMode={viewMode}
           onViewModeChange={setViewMode}
           resultCount={filteredCards.length}

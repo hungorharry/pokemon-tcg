@@ -5,8 +5,8 @@ export const TIER_META = {
   S: { name: 'Grail / biểu tượng', letter: 'S', desc: 'S Tier / Legendary Grails' },
   A: { name: 'Cốt lõi dài hạn', letter: 'A', desc: 'A Tier / Blue Chip' },
   B: { name: 'Có tiềm năng', letter: 'B', desc: 'B Tier / Value Potential' },
-  C: { name: 'Theo dõi', letter: 'C', desc: 'C Tier / Watchlist' },
-  D: { name: 'Đầu cơ / phổ thông', letter: 'D', desc: 'D Tier / Speculative' },
+  C: { name: 'Theo dõi / Khởi điểm', letter: 'C', desc: 'C Tier / Value Starter' },
+  D: { name: 'Phổ thông / P/P sinh viên', letter: 'D', desc: 'D Tier / Entry-Level P/P' },
   F: { name: 'Không ưu tiên', letter: 'F', desc: 'F Tier / Avoid Premium' },
 };
 

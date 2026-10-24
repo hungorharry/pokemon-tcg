@@ -9,10 +9,9 @@ export const dec = (n: number | string | null | undefined): string => {
 export const gradeToTier = (s: number): 'S' | 'A' | 'B' | 'C' | 'D' | 'F' => {
   if (s >= 90) return 'S';
   if (s >= 80) return 'A';
-  if (s >= 65) return 'B';
-  if (s >= 50) return 'C';
-  if (s >= 40) return 'D';
-  return 'F';
+  if (s >= 70) return 'B';
+  if (s >= 63) return 'C';
+  return 'D';
 };
 
 export const estimatedScore = (c: PokemonCard): number => {

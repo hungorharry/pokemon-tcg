@@ -1,7 +1,7 @@
 export interface PokemonCard {
   id: string;
   name: string;
-  character: 'Snorlax' | 'Munchlax';
+  character: 'Snorlax' | 'Munchlax' | 'Charizard' | 'Pikachu';
   year: number;
   set: string;
   variant: string;

@@ -131,13 +131,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
   // Counts for pills
   const snorlaxCount = catalog.filter((c) => c.character === 'Snorlax').length;
   const munchlaxCount = catalog.filter((c) => c.character === 'Munchlax').length;
+  const charizardCount = catalog.filter((c) => c.character === 'Charizard').length;
+  const pikachuCount = catalog.filter((c) => c.character === 'Pikachu').length;
   const psa10Count = catalog.filter((c) => Number(c.grade) === 10).length;
   const psa9Count = catalog.filter((c) => Number(c.grade) === 9).length;
   const psaSub9Count = catalog.filter((c) => Number(c.grade) < 9).length;
 
   const currentTitle =
     currentTier === 'ALL'
-      ? 'Toàn bộ thẻ PSA (Snorlax & Munchlax)'
+      ? 'Toàn bộ thẻ PSA (Snorlax, Munchlax, Charizard & Pikachu)'
       : TIER_META[currentTier]?.desc || 'Danh mục thẻ';
 
   const handleExport = () => {
@@ -226,6 +228,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
           resultCount={filteredCards.length}
           snorlaxCount={snorlaxCount}
           munchlaxCount={munchlaxCount}
+          charizardCount={charizardCount}
+          pikachuCount={pikachuCount}
           psa10Count={psa10Count}
           psa9Count={psa9Count}
           psaSub9Count={psaSub9Count}

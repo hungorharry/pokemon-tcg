@@ -24,6 +24,8 @@ interface ToolbarProps {
   resultCount: number;
   snorlaxCount: number;
   munchlaxCount: number;
+  charizardCount?: number;
+  pikachuCount?: number;
   psa10Count: number;
   psa9Count: number;
   psaSub9Count: number;
@@ -51,6 +53,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   resultCount,
   snorlaxCount,
   munchlaxCount,
+  charizardCount = 0,
+  pikachuCount = 0,
   psa10Count,
   psa9Count,
   psaSub9Count,
@@ -87,9 +91,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           onChange={(e) => onCharacterChange(e.target.value)}
           className="control"
         >
-          <option value="all">Snorlax + Munchlax</option>
-          <option value="Snorlax">Chỉ Snorlax</option>
-          <option value="Munchlax">Chỉ Munchlax</option>
+          <option value="all">Tất cả Pokémon</option>
+          <option value="Charizard">🔥 Chỉ Charizard ({charizardCount})</option>
+          <option value="Pikachu">⚡ Chỉ Pikachu ({pikachuCount})</option>
+          <option value="Snorlax">💤 Chỉ Snorlax ({snorlaxCount})</option>
+          <option value="Munchlax">🍎 Chỉ Munchlax ({munchlaxCount})</option>
         </select>
 
         <select
@@ -205,6 +211,16 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               >
                 <span>🔄</span> <b>{sortLabels[sort] || 'Điểm tiềm năng'}</b>
               </span>
+              {charizardCount > 0 && (
+                <span className="meta-box" style={{ color: '#EA580C', background: '#FFF7ED', borderColor: 'rgba(234,88,12,0.3)' }}>
+                  <span>🔥</span> <b>{dec(charizardCount)}</b> Charizard
+                </span>
+              )}
+              {pikachuCount > 0 && (
+                <span className="meta-box" style={{ color: '#CA8A04', background: '#FEFCE8', borderColor: 'rgba(202,138,4,0.3)' }}>
+                  <span>⚡</span> <b>{dec(pikachuCount)}</b> Pikachu
+                </span>
+              )}
               <span className="meta-box">
                 <span>🐻</span> <b>{dec(snorlaxCount)}</b> Snorlax
               </span>

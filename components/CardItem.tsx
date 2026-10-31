@@ -22,6 +22,8 @@ interface CardItemProps {
   onOpenLightbox: (card: PokemonCard) => void;
   onToggleFavorite: (id: string) => void;
   isFavorite: boolean;
+  onToggleSelect?: (id: string) => void;
+  isSelected?: boolean;
 }
 
 export const CardItem: React.FC<CardItemProps> = ({
@@ -32,6 +34,8 @@ export const CardItem: React.FC<CardItemProps> = ({
   onOpenLightbox,
   onToggleFavorite,
   isFavorite,
+  onToggleSelect,
+  isSelected = false,
 }) => {
   const [imgError, setImgError] = useState(false);
   const score = getScore(card);
@@ -56,7 +60,19 @@ export const CardItem: React.FC<CardItemProps> = ({
   };
 
   return (
-    <article className="card" data-card={card.id}>
+    <article
+      className={`card ${isSelected ? 'selected-card' : ''}`}
+      data-card={card.id}
+      style={
+        isSelected
+          ? {
+              outline: '2.5px solid #10B981',
+              boxShadow: '0 0 0 1px #10B981, 0 8px 24px rgba(16, 185, 129, 0.35)',
+              transform: 'translateY(-2px)',
+            }
+          : undefined
+      }
+    >
       <div
         className="card-visual"
         onClick={() => onOpenLightbox(card)}
@@ -84,6 +100,37 @@ export const CardItem: React.FC<CardItemProps> = ({
           <span className="psa-chip chip-company chip-psa">{gradeLabel}</span>
           <span className="grade-chip">{card.character.toUpperCase()}</span>
         </div>
+
+        {onToggleSelect && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSelect(card.id);
+            }}
+            style={{
+              position: 'absolute',
+              top: '8px',
+              right: '46px',
+              zIndex: 10,
+              width: '28px',
+              height: '28px',
+              borderRadius: '6px',
+              border: isSelected ? '1.5px solid #10B981' : '1px solid rgba(255, 255, 255, 0.4)',
+              background: isSelected ? '#10B981' : 'rgba(15, 23, 42, 0.75)',
+              color: '#FFFFFF',
+              display: 'grid',
+              placeItems: 'center',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 800,
+              transition: 'all 0.15s ease',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+            }}
+            title={isSelected ? 'Bỏ chọn thẻ này' : 'Chọn thẻ để cộng dồn tính tổng'}
+          >
+            {isSelected ? '✓' : '＋'}
+          </button>
+        )}
 
         <button
           className={`heart ${isFavorite ? 'active' : ''}`}
@@ -253,6 +300,31 @@ export const CardItem: React.FC<CardItemProps> = ({
             🛒 eBay ↗
           </a>
         </div>
+
+        {onToggleSelect && (
+          <button
+            onClick={() => onToggleSelect(card.id)}
+            style={{
+              width: '100%',
+              marginTop: '6px',
+              padding: '6px 10px',
+              borderRadius: '6px',
+              border: isSelected ? '1px solid #10B981' : '1px dashed #CBD5E1',
+              background: isSelected ? '#ECFDF5' : '#F8FAFC',
+              color: isSelected ? '#047857' : '#64748B',
+              fontWeight: 700,
+              fontSize: '11.5px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <span>{isSelected ? '✓ Đã chọn tính tổng' : '＋ Chọn để cộng dồn giá'}</span>
+          </button>
+        )}
       </div>
     </article>
   );

@@ -26,6 +26,9 @@ interface ToolbarProps {
   munchlaxCount: number;
   charizardCount?: number;
   pikachuCount?: number;
+  ghostCount?: number;
+  gengarCount?: number;
+  mimikyuCount?: number;
   psa10Count: number;
   psa9Count: number;
   psaSub9Count: number;
@@ -55,6 +58,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   munchlaxCount,
   charizardCount = 0,
   pikachuCount = 0,
+  ghostCount = 0,
+  gengarCount = 0,
+  mimikyuCount = 0,
   psa10Count,
   psa9Count,
   psaSub9Count,
@@ -91,11 +97,18 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           onChange={(e) => onCharacterChange(e.target.value)}
           className="control"
         >
-          <option value="all">Tất cả Pokémon</option>
+          <option value="all">Tất cả Pokémon (593 thẻ)</option>
+          <option value="ghost">👻 Tất cả Hệ Ma Ghost ({ghostCount})</option>
+          <option value="Gengar">🟣 Chỉ Gengar ({gengarCount})</option>
+          <option value="Mimikyu">🎭 Chỉ Mimikyu ({mimikyuCount})</option>
           <option value="Charizard">🔥 Chỉ Charizard ({charizardCount})</option>
           <option value="Pikachu">⚡ Chỉ Pikachu ({pikachuCount})</option>
           <option value="Snorlax">💤 Chỉ Snorlax ({snorlaxCount})</option>
           <option value="Munchlax">🍎 Chỉ Munchlax ({munchlaxCount})</option>
+          <option value="Gastly">🔮 Chỉ Gastly</option>
+          <option value="Duskull">💀 Chỉ Duskull</option>
+          <option value="Haunter">👅 Chỉ Haunter</option>
+          <option value="Chandelure">🕯️ Chỉ Chandelure</option>
         </select>
 
         <select

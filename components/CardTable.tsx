@@ -9,6 +9,9 @@ interface CardTableProps {
   currency: Currency;
   onOpenDetail: (card: PokemonCard) => void;
   onToggleSort: (type: 'pc' | 'price') => void;
+  onToggleSelect?: (id: string) => void;
+  selectedCardIds?: Record<string, boolean>;
+  onSelectAll?: () => void;
 }
 
 export const CardTable: React.FC<CardTableProps> = ({
@@ -16,6 +19,9 @@ export const CardTable: React.FC<CardTableProps> = ({
   currency,
   onOpenDetail,
   onToggleSort,
+  onToggleSelect,
+  selectedCardIds = {},
+  onSelectAll,
 }) => {
   const badgeDiff = (d: number | null) => {
     if (d == null) return <span className="delta mid">Chưa có %</span>;
@@ -34,6 +40,17 @@ export const CardTable: React.FC<CardTableProps> = ({
       <table className="ranking">
         <thead>
           <tr>
+            {onToggleSelect && (
+              <th style={{ width: '40px', textAlign: 'center' }}>
+                <input
+                  type="checkbox"
+                  style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
+                  checked={cards.length > 0 && cards.every((c) => selectedCardIds[c.id])}
+                  onChange={onSelectAll}
+                  title="Chọn tất cả các thẻ đang lọc"
+                />
+              </th>
+            )}
             <th>Tier</th>
             <th>Tên thẻ</th>
             <th>Nhân vật</th>
@@ -64,8 +81,31 @@ export const CardTable: React.FC<CardTableProps> = ({
             const diff = getDiff(c);
             const bestPrice = c.listingPriceUSD || c.manualPrice;
 
+            const isSelected = Boolean(selectedCardIds[c.id]);
+
             return (
-              <tr key={c.id}>
+              <tr
+                key={c.id}
+                style={
+                  isSelected
+                    ? {
+                        background: 'rgba(16, 185, 129, 0.08)',
+                        outline: '1px solid rgba(16, 185, 129, 0.3)',
+                      }
+                    : undefined
+                }
+              >
+                {onToggleSelect && (
+                  <td style={{ textAlign: 'center' }}>
+                    <input
+                      type="checkbox"
+                      style={{ cursor: 'pointer', transform: 'scale(1.2)' }}
+                      checked={isSelected}
+                      onChange={() => onToggleSelect(c.id)}
+                      title="Chọn thẻ này"
+                    />
+                  </td>
+                )}
                 <td>
                   <span className={`tierSmall letter-${tier}`}>{tier}</span>
                 </td>

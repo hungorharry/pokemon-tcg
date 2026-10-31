@@ -1,13 +1,13 @@
 export interface PokemonCard {
   id: string;
   name: string;
-  character: 'Snorlax' | 'Munchlax' | 'Charizard' | 'Pikachu';
+  character: string;
   year: number;
   set: string;
   variant: string;
   grade: number;
   gradeLabel?: string;
-  slabCompany: 'PSA';
+  slabCompany: 'PSA' | 'BGS' | 'CGC' | string;
   tierScore?: number | null;
   pricecharting?: number | null;
   manualPrice?: number | null;

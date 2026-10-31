@@ -11,6 +11,7 @@ import { CardDeck } from './CardDeck';
 import { CardTable } from './CardTable';
 import { DrawerDossier } from './DrawerDossier';
 import { LightboxModal } from './LightboxModal';
+import { SelectionSummaryBar } from './SelectionSummaryBar';
 import { getScore, gradeToTier, getBest, getDiff } from '@/lib/utils';
 import { TIER_META } from '@/lib/constants';
 
@@ -30,6 +31,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
   const [maxBudget400M, setMaxBudget400M] = useState<boolean>(true);
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const [selectedCardIds, setSelectedCardIds] = useState<Record<string, boolean>>({});
   const [serverOnline, setServerOnline] = useState<boolean>(true);
 
   // Modals
@@ -69,6 +71,32 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
     } catch {}
   };
 
+  const handleToggleSelect = (id: string) => {
+    setSelectedCardIds((prev) => {
+      const next = { ...prev };
+      if (next[id]) delete next[id];
+      else next[id] = true;
+      return next;
+    });
+  };
+
+  const handleClearSelection = () => {
+    setSelectedCardIds({});
+  };
+
+  const handleSelectAll = () => {
+    const allSelected = filteredCards.length > 0 && filteredCards.every((c) => selectedCardIds[c.id]);
+    if (allSelected) {
+      setSelectedCardIds({});
+    } else {
+      const next: Record<string, boolean> = {};
+      filteredCards.forEach((c) => {
+        next[c.id] = true;
+      });
+      setSelectedCardIds(next);
+    }
+  };
+
   // Filtered and Sorted Cards
   const filteredCards = useMemo(() => {
     const q = searchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -90,7 +118,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
         if (tg === 10 ? gr < 10 : Math.floor(gr) !== tg) return false;
       }
       if (currentTier !== 'ALL' && (c.tier || gradeToTier(getScore(c))) !== currentTier) return false;
-      if (character !== 'all' && c.character !== character) return false;
+      if (character !== 'all') {
+        if (character === 'ghost') {
+          const ghostTypes = ['Gengar', 'Giratina', 'Mimikyu', 'Chandelure', 'Gastly', 'Duskull', 'Haunter'];
+          if (!ghostTypes.includes(c.character)) return false;
+        } else if (c.character !== character) {
+          return false;
+        }
+      }
       if (showFavoritesOnly && !favorites[c.id]) return false;
 
       const hay = `${c.name} ${c.set} ${c.variant} ${c.character} PSA ${c.year || ''}`
@@ -133,13 +168,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
   const munchlaxCount = catalog.filter((c) => c.character === 'Munchlax').length;
   const charizardCount = catalog.filter((c) => c.character === 'Charizard').length;
   const pikachuCount = catalog.filter((c) => c.character === 'Pikachu').length;
+  const ghostCount = catalog.filter((c) => ['Gengar', 'Giratina', 'Mimikyu', 'Chandelure', 'Gastly', 'Duskull', 'Haunter'].includes(c.character)).length;
+  const gengarCount = catalog.filter((c) => c.character === 'Gengar').length;
+  const mimikyuCount = catalog.filter((c) => c.character === 'Mimikyu').length;
   const psa10Count = catalog.filter((c) => Number(c.grade) === 10).length;
   const psa9Count = catalog.filter((c) => Number(c.grade) === 9).length;
   const psaSub9Count = catalog.filter((c) => Number(c.grade) < 9).length;
 
+  const selectedCards = useMemo(
+    () => catalog.filter((c) => selectedCardIds[c.id]),
+    [catalog, selectedCardIds]
+  );
+
   const currentTitle =
     currentTier === 'ALL'
-      ? 'Toàn bộ thẻ PSA (Snorlax, Munchlax, Charizard & Pikachu)'
+      ? 'Toàn bộ thẻ Graded PSA/BGS (Snorlax, Charizard, Pikachu & Ghost Series)'
       : TIER_META[currentTier]?.desc || 'Danh mục thẻ';
 
   const handleExport = () => {
@@ -230,6 +273,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
           munchlaxCount={munchlaxCount}
           charizardCount={charizardCount}
           pikachuCount={pikachuCount}
+          ghostCount={ghostCount}
+          gengarCount={gengarCount}
+          mimikyuCount={mimikyuCount}
           psa10Count={psa10Count}
           psa9Count={psa9Count}
           psaSub9Count={psaSub9Count}
@@ -248,6 +294,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
               onOpenLightbox={setSelectedLightboxCard}
               onToggleFavorite={handleToggleFavorite}
               favorites={favorites}
+              onToggleSelect={handleToggleSelect}
+              selectedCardIds={selectedCardIds}
             />
           </div>
         ) : (
@@ -256,6 +304,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
               cards={filteredCards}
               currency={currency}
               onOpenDetail={setSelectedDetailCard}
+              onToggleSelect={handleToggleSelect}
+              selectedCardIds={selectedCardIds}
+              onSelectAll={handleSelectAll}
               onToggleSort={(type) => {
                 if (type === 'pc') {
                   setSort(sort === 'pc_desc' ? 'pc_asc' : 'pc_desc');
@@ -266,6 +317,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ initialCatalog }) => {
             />
           </div>
         )}
+
+        <SelectionSummaryBar
+          selectedCards={selectedCards}
+          currency={currency}
+          onClearSelection={handleClearSelection}
+        />
 
         <footer>
           <strong>Minh bạch nguồn:</strong> PriceCharting / Population trong bộ dữ liệu gốc là snapshot được thẩm định chuẩn PSA. Giá sàn eBay & Fanatics Buy Now là giá chào bán thực tế tại thời điểm kiểm định. Hệ thống Next.js đảm bảo render siêu tốc và trải nghiệm mượt mà không độ trễ.
